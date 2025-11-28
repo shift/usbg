@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "usbg"
+version = "0.1.0"
+description = "USBGuard Waybar Applet"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyGObject>=3.42.0",
+    "dbus-python>=1.2.18",
+]
+
+[project.scripts]
+usbg = "usbg.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["usbg*"]

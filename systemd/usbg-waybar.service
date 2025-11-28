@@ -1,0 +1,13 @@
+[Unit]
+Description=USBGuard Waybar Applet
+After=usbguard.service
+Requires=usbguard.service
+
+[Service]
+Type=simple
+ExecStart=%h/.nix-profile/bin/usbg waybar --continuous
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

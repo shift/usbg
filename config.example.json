@@ -1,0 +1,15 @@
+{
+  "waybar": {
+    "update_interval": 2,
+    "show_tooltip": true,
+    "show_notifications": true
+  },
+  "gui": {
+    "start_minimized": false,
+    "enable_system_tray": true
+  },
+  "usbguard": {
+    "auto_allow_known": false,
+    "notification_on_block": true
+  }
+}
