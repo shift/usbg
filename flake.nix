@@ -83,91 +83,6 @@
         };
       }
     ) // {
-{
-  description = "USBGuard Waybar Applet - Control USBGuard from Waybar";
-
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-  };
-
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        
-        pythonEnv = pkgs.python3.withPackages (ps: with ps; [
-          pygobject3
-          dbus-python
-          setuptools
-        ]);
-
-        usbg = pkgs.python3Packages.buildPythonApplication {
-          pname = "usbg";
-          version = "0.1.0";
-          
-          src = ./.;
-          
-          propagatedBuildInputs = with pkgs.python3Packages; [
-            pygobject3
-            dbus-python
-          ];
-          
-          buildInputs = with pkgs; [
-            gtk4
-            libadwaita
-            gobject-introspection
-            wrapGAppsHook3
-          ];
-          
-          nativeBuildInputs = with pkgs; [
-            gobject-introspection
-            wrapGAppsHook3
-            python3Packages.setuptools
-          ];
-          
-          dontWrapGApps = true;
-          
-          makeWrapperArgs = [
-            "\${gappsWrapperArgs[@]}"
-          ];
-          
-          format = "pyproject";
-        };
-        
-      in {
-        packages = {
-          default = usbg;
-          usbg = usbg;
-        };
-        
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            pythonEnv
-            gtk4
-            libadwaita
-            gobject-introspection
-            usbguard
-            pkg-config
-            python3Packages.build
-            python3Packages.setuptools
-            python3Packages.wheel
-          ];
-          
-          shellHook = ''
-            export GI_TYPELIB_PATH="${pkgs.gtk4}/lib/girepository-1.0:${pkgs.libadwaita}/lib/girepository-1.0:$GI_TYPELIB_PATH"
-            export LD_LIBRARY_PATH="${pkgs.gtk4}/lib:${pkgs.libadwaita}/lib:$LD_LIBRARY_PATH"
-            export IN_NIX_SHELL=1
-            echo "USBGuard Waybar Applet development environment"
-            echo "Run 'python -m usbg' to start the applet"
-          '';
-        };
-        
-        checks = {
-          build = usbg;
-        };
-      }
-    ) // {
       nixosModules.default = { config, lib, pkgs, ... }:
         with lib;
         let
@@ -303,6 +218,3 @@
         };
     };
 }
-    };
-}</content>
-<parameter name="filePath">/home/shift/code/usbg/nixos-module.nix
