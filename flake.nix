@@ -139,7 +139,7 @@
             # Waybar integration
             programs.waybar = mkIf cfg.waybar.enable {
               enable = true;
-              settings = [ cfg.waybar.config ];
+              settings = cfg.waybar.config;
             };
 
             # Systemd user service
@@ -196,7 +196,7 @@
             # Waybar integration
             programs.waybar = mkIf cfg.waybar.enable {
               enable = true;
-              settings = [ cfg.waybar.config ];
+              settings = cfg.waybar.config;
             };
 
             # Systemd user service
