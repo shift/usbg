@@ -24,13 +24,13 @@ A Wayland/Waybar compatible applet for controlling USBGuard with a GTK4 GUI inte
 ### Using Nix Flakes
 
 ```bash
-nix profile install github:yourusername/usbg
+nix profile install github:shift/usbg
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/yourusername/usbg.git
+git clone https://github.com/shift/usbg.git
 cd usbg
 nix build
 ```
@@ -43,7 +43,7 @@ If using flakes, add USBG to your flake inputs:
 {
   inputs = {
     # ... other inputs
-    usbg.url = "github:yourusername/usbg";
+    usbg.url = "github:shift/usbg";
   };
 
   outputs = { self, nixpkgs, usbg, ... }: {
@@ -71,7 +71,7 @@ For non-flake setups, add the module directly:
 
 {
   imports = [
-    (builtins.fetchTarball "https://github.com/yourusername/usbg/archive/main.tar.gz")
+    (builtins.fetchTarball "https://github.com/shift/usbg/archive/main.tar.gz")
   ];
 
   services.usbg = {
@@ -90,7 +90,7 @@ For Home Manager users (recommended if Waybar is managed via Home Manager):
 {
   inputs = {
     # ... other inputs
-    usbg.url = "github:yourusername/usbg";
+    usbg.url = "github:shift/usbg";
   };
 
   outputs = { self, nixpkgs, home-manager, usbg, ... }: {
@@ -290,7 +290,7 @@ Create `/etc/dbus-1/system.d/usbguard.conf`:
  "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
 <busconfig>
-  <policy user="yourusername">
+  <policy user="shift">
     <allow send_destination="org.usbguard1"/>
   </policy>
 </busconfig>
