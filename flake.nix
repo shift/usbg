@@ -31,6 +31,7 @@
           buildInputs = with pkgs; [
             gtk4
             libadwaita
+            libnotify
             gobject-introspection
             wrapGAppsHook3
           ];
